@@ -14,6 +14,10 @@ function hashJPEGData(data, bits, method) {
   return blockhash.blockhashData(imgData, bits, method);
 };
 
+app.get('/_status', function(req, res) {
+  res.send('OK');
+});
+
 app.post('/captures', function(req, res) {
   if (!req.body.image_data) {
     return res.status(400).json({
