@@ -29,14 +29,16 @@ app.post('/captures', function(req, res) {
 });
 
 app.get('/schedule', function(req, res) {
-  res.json({
-      'sched1': {
-        time: 0
-      },
-      'sched2': {
-        time: 0
-      }
-  });
+  res.json([
+    {
+      id: 'sched1',
+      time: 0
+    },
+    {
+      id: 'sched2',
+      time: 0
+    }
+  ]);
 });
 
 var port = process.env.PORT || 8888;
