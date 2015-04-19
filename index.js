@@ -18,7 +18,6 @@ function hashJPEGData(data) {
 };
 
 var DIRTY_THRESHOLD = 30;
-var PUBNUB_KEY = process.env.PUBNUB_KEY;
 
 var pubnub = Pubnub.init({
   publish_key: 'pub-c-35489623-546c-4c7a-ae0e-f5be885db61c'
@@ -80,6 +79,9 @@ app.post('/admin/checks', function(req, res) {
       message: message,
       callback: function(resp) {
         console.log("Pubnub response:", resp);
+      },
+      error: function(resp) {
+        console.log("Pubnub error:", resp);
       }
     });
   });
