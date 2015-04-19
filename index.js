@@ -20,7 +20,8 @@ function hashJPEGData(data) {
 var DIRTY_THRESHOLD = 30;
 
 var pubnub = Pubnub.init({
-  publish_key: 'pub-c-35489623-546c-4c7a-ae0e-f5be885db61c'
+  publish_key: 'pub-c-35489623-546c-4c7a-ae0e-f5be885db61c',
+  subscribe_key: 'sub-c-1905cd86-e60c-11e4-8e57-02ee2ddab7fe'
 });
 
 var photoRequests = {};
