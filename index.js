@@ -4,6 +4,7 @@ var blockhash = require('blockhash'),
     bodyParser = require('body-parser'),
     uuid = require('node-uuid'),
     Q = require('q'),
+    Pubnub = require('pubnub'),
     app = express();
 
 app.use(bodyParser.json({limit:'2mb'}));
@@ -16,7 +17,12 @@ function hashJPEGData(data) {
   return blockhash.blockhashData(imgData, 16, 2);
 };
 
-var DIFF_THRESHOLD = 10;
+var DIRTY_THRESHOLD = 30;
+var PUBNUB_KEY = process.env.PUBNUB_KEY;
+
+var pubnub = Pubnub.init({
+  publish_key: 'pub-c-35489623-546c-4c7a-ae0e-f5be885db61c'
+});
 
 var photoRequests = {};
 var cleanHash = null;
@@ -65,7 +71,14 @@ app.post('/admin/checks', function(req, res) {
 
   requestPhoto(req.body.time).then(function(hash) {
     var distance = blockhash.hammingDistance(hash, cleanHash);
-    console.log('Hamming distance:', distance);
+    
+    var message = (distance > DIRTY_THRESHOLD) ? 'dirty' : 'clean';
+    console.log(message, ', hamming distance:', distance);
+
+    pubnub.publish({
+      channel: 'chorify',
+      message: message
+    });
   });
 });
 

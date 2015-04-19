@@ -10,7 +10,8 @@
     "png-js": "~0.1.1",
     "body-parser": "~1.12.3",
     "node-uuid": "~1.4.3",
-    "q": "~1.2.0"
+    "q": "~1.2.0",
+    "pubnub": "~3.7.10"
   },
   "devDependencies": {},
   "scripts": {
