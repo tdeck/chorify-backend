@@ -8,12 +8,12 @@ var blockhash = require('blockhash'),
 
 app.use(bodyParser.json({limit:'2mb'}));
 
-function hashJPEGData(data, bits, method) {
+function hashJPEGData(data) {
   var imgData = jpeg.decode(data);
 
   if (!imgData) throw new Error("Couldn't decode image");
 
-  return blockhash.blockhashData(imgData, bits, method);
+  return blockhash.blockhashData(imgData, 16, 2);
 };
 
 var DIFF_THRESHOLD = 10;
