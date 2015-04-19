@@ -39,6 +39,13 @@ app.get('/_status', function(req, res) {
   res.send('OK');
 });
 
+app.delete('/admin/checks', function(req, res) {
+  for (var id in photoRequests) {
+    delete photoRequests[id];
+  }
+  res.status(200).end();
+});
+
 app.put('/admin/isclean', function() {
   requestPhoto().then(function(hash) {
     cleanHash = hash;
