@@ -6,7 +6,7 @@ var blockhash = require('blockhash'),
     Q = require('q'),
     app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'2mb'}));
 
 function hashJPEGData(data, bits, method) {
   var imgData = jpeg.decode(data);
