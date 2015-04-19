@@ -46,7 +46,7 @@ app.delete('/admin/checks', function(req, res) {
   res.status(200).end();
 });
 
-app.put('/admin/isclean', function() {
+app.put('/admin/isclean', function(req, res) {
   requestPhoto().then(function(hash) {
     cleanHash = hash;
     console.log('Clean', hash);
@@ -54,7 +54,7 @@ app.put('/admin/isclean', function() {
   });
 });
 
-app.post('/admin/checks', function() {
+app.post('/admin/checks', function(req, res) {
   if (!req.body.time) {
     return res.status(400).json({
       error: 'Missing required parameter `time`'
