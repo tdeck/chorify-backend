@@ -77,7 +77,10 @@ app.post('/admin/checks', function(req, res) {
 
     pubnub.publish({
       channel: 'chorify',
-      message: message
+      message: message,
+      callback: function(resp) {
+        console.log("Pubnub response:", resp);
+      }
     });
   });
 });
